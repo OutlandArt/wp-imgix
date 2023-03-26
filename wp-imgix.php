@@ -8,7 +8,7 @@
  * Author URI: https://www.webdoodle.com.au/
  */
 
-$WP_IMGIX_URL = get_option('WP_IMGIX_URL') ? get_option('WP_IMGIX_URL') : WP_IMGIX_URL;
+$WP_IMGIX_URL = get_option('WP_IMGIX_URL') ? get_option('WP_IMGIX_URL') : 'oh.imgix.net';
 if (!$WP_IMGIX_URL) {
     return;
 }

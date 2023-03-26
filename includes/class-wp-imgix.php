@@ -57,7 +57,7 @@ class WPImgIX
 		if (!function_exists('imgix_url'))
 			return;
 
-        $WP_IMGIX_URL = get_option('WP_IMGIX_URL') ? get_option('WP_IMGIX_URL') : WP_IMGIX_URL;
+        $WP_IMGIX_URL = get_option('WP_IMGIX_URL') ? get_option('WP_IMGIX_URL') : 'oh.imgix.net';
         $WP_IMGIX_SIGNING_TOKEN = get_option('WP_IMGIX_SIGNING_TOKEN') ? get_option('WP_IMGIX_SIGNING_TOKEN') : WP_IMGIX_SIGNING_TOKEN;
 		$this->builder = new UrlBuilder($WP_IMGIX_URL);
 		if ($WP_IMGIX_SIGNING_TOKEN) {
