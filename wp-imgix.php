@@ -74,5 +74,10 @@ function imgix_url($image_url, $args = array(), $scheme = null)
 	 * @param string $image_url   The image URL without query args.
 	 * @param array  $args        A key value array of the query args appended to $image_url.
 	 */
+
+	// Don't append any queries to gif images, otherwise it might break imgix
+	if(strpos($image_url,'.gif') !== false ) { 
+		return strtok($imgix_url, '?');
+	} 
 	return apply_filters('imgix_url', $imgix_url, $image_url, $args);
 }
