@@ -16,7 +16,9 @@ class WPImgIX
 	protected static $extensions = array(
 		'jpg',
 		'jpeg',
-		'png'
+		'png',
+		'gif',
+		'mp4'
 	);
 
 	// Don't access this directly. Instead, use self::image_sizes() so it's actually populated with something.
@@ -58,7 +60,7 @@ class WPImgIX
 			return;
 
         $WP_IMGIX_URL = get_option('WP_IMGIX_URL') ? get_option('WP_IMGIX_URL') : 'oh.imgix.net';
-        $WP_IMGIX_SIGNING_TOKEN = get_option('WP_IMGIX_SIGNING_TOKEN') ? get_option('WP_IMGIX_SIGNING_TOKEN') : WP_IMGIX_SIGNING_TOKEN;
+        $WP_IMGIX_SIGNING_TOKEN = get_option('WP_IMGIX_SIGNING_TOKEN') ? get_option('WP_IMGIX_SIGNING_TOKEN') : '';
 		$this->builder = new UrlBuilder($WP_IMGIX_URL);
 		if ($WP_IMGIX_SIGNING_TOKEN) {
 			$this->builder->setSignKey($WP_IMGIX_SIGNING_TOKEN);
@@ -118,7 +120,7 @@ class WPImgIX
 	{
 		$images = array();
 
-		if (preg_match_all('#(?:<a[^>]+?href=["|\'](?P<link_url>[^\s]+?)["|\'][^>]*?>\s*)?(?P<img_tag><img[^>]+?src=["|\'](?P<img_url>[^\s]+?)["|\'].*?>){1}(?:\s*</a>)?#is', $content, $images)) {
+		if (preg_match_all('#((?:<a[^>]+?href=["|\'](?P<vido_link_url>[^\s]+?)["|\'][^>]*?>\s*)?(?P<image_tag><source type="video/mp4"[^>]+?src=["|\'](?P<image_url>[^\s]+?)["|\'].*?>){1}(?:\s*</a>)?)|((?:<a[^>]+?href=["|\'](?P<link_url>[^\s]+?)["|\'][^>]*?>\s*)?(?P<img_tag><img[^>]+?src=["|\'](?P<img_url>[^\s]+?)["|\'].*?>){1}(?:\s*</a>)?)#is', $content, $images)) {
 			foreach ($images as $key => $unused) {
 				// Simplify the output as much as possible, mostly for confirming test results.
 				if (is_numeric($key) && $key > 0)
